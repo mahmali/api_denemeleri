@@ -7,19 +7,22 @@ import (
 	"github.com/mahmali/api_denemeleri/veritabani"
 )
 
-func Login(c *gin.Context) {
+func Guncelle(c *gin.Context) {
 	var model models.Kullanici
 	c.ShouldBindJSON(&model)
 
-	eklenecek := models.Kullanici{
-		Isim:  model.Isim,
-		Mail:  model.Mail,
-		Sifre: model.Sifre,
-	}
-	fmt.Println(eklenecek)
-	err := veritabani.DB().Create(&eklenecek).Error
+	fmt.Println(model)
+	var user models.Kullanici
+	err := veritabani.DB().Model(&user).Where("id = ?", model.ID).Save(
+		models.Kullanici{
+			Isim:  model.Isim,
+			Mail:  model.Mail,
+			Sifre: model.Sifre,
+			ID:    model.ID,
+		}).Error
 	if err != nil {
 		fmt.Println(err.Error())
 	}
+
 	c.JSON(200, "işlem başarılı")
 }

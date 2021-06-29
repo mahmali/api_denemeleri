@@ -7,9 +7,9 @@ import (
 	"github.com/mahmali/api_denemeleri/veritabani"
 )
 
-func Login(c *gin.Context) {
+func YeniKayit(c *gin.Context) {
 	var model models.Kullanici
-	c.ShouldBindJSON(&model)
+	c.ShouldBindJSON(&model) //gelen verileri birleştirir.
 
 	eklenecek := models.Kullanici{
 		Isim:  model.Isim,
@@ -21,5 +21,5 @@ func Login(c *gin.Context) {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
-	c.JSON(200, "işlem başarılı")
+	c.JSON(200, "yeni kayit eklendi")
 }

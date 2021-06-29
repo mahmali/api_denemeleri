@@ -11,6 +11,8 @@ func main() {
 	veritabani.Baglan()
 	veritabani.AutoMigrate()
 	veritabani.KullaniciOlustur()
-	api.Login()
+	api.DBdeneme()
+
+	api.ApiInit()
 
 }
